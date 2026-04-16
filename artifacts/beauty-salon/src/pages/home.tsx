@@ -8,7 +8,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
-import { getSiteContent, getFeaturedServices, getDefaultContent, SiteContent, Service } from "@/lib/apiService";
+import { getSiteContent, getFeaturedServices, getDefaultContent, SiteContent, Service } from "@/lib/firebaseService";
 
 const iconMap: Record<string, React.ReactNode> = {
   award: <Award size={28} />,

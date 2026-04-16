@@ -4,7 +4,7 @@ import { X, ZoomIn } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
-import { getGallery, getSiteContent, GalleryItem, SiteContent } from "@/lib/apiService";
+import { getGallery, getSiteContent, GalleryItem, SiteContent } from "@/lib/firebaseService";
 
 const galleryCategories = ["All", "Bridal", "Hair", "Makeup", "Nails", "Skin"];
 

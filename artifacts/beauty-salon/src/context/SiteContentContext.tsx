@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { getSiteContent, SiteContent, getDefaultContent } from "@/lib/apiService";
+import { getSiteContent, SiteContent, getDefaultContent } from "@/lib/firebaseService";
 
 interface SiteContentContextValue {
   content: SiteContent;

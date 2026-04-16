@@ -4,7 +4,7 @@ import { Search, Clock, Tag } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
-import { getServices, getSiteContent, Service, SiteContent } from "@/lib/apiService";
+import { getServices, getSiteContent, Service, SiteContent } from "@/lib/firebaseService";
 
 const categories = ["All", "Hair", "Makeup", "Skin", "Nails", "Bridal", "Spa"];
 
