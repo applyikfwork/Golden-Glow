@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Instagram, Phone, MapPin, Heart } from "lucide-react";
+import { Instagram, Phone, MapPin, Heart, ExternalLink } from "lucide-react";
 import { Link } from "wouter";
 
 interface FooterProps {
@@ -8,6 +8,48 @@ interface FooterProps {
   whatsappLink?: string;
   instagramLink?: string;
   footerText?: string;
+}
+
+function FooterLogo({ size = 36 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ filter: "drop-shadow(0 1px 6px rgba(212,168,67,0.5))" }}
+    >
+      <defs>
+        <radialGradient id="ft-bg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#e8c05a" />
+          <stop offset="100%" stopColor="#8a6410" />
+        </radialGradient>
+        <radialGradient id="ft-shine" cx="35%" cy="30%" r="60%">
+          <stop offset="0%" stopColor="#ffe87a" stopOpacity="0.6" />
+          <stop offset="100%" stopColor="#d4a843" stopOpacity="0" />
+        </radialGradient>
+        <linearGradient id="ft-petal" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#fff9e6" />
+          <stop offset="100%" stopColor="#f0c040" />
+        </linearGradient>
+      </defs>
+      <circle cx="32" cy="32" r="31" fill="url(#ft-bg)" />
+      <circle cx="32" cy="32" r="31" fill="url(#ft-shine)" />
+      <circle cx="32" cy="32" r="27" fill="#1a0e00" fillOpacity="0.5" />
+      <ellipse cx="32" cy="20" rx="4" ry="8" fill="url(#ft-petal)" opacity="0.92" transform="rotate(0,32,32)" />
+      <ellipse cx="32" cy="20" rx="4" ry="8" fill="url(#ft-petal)" opacity="0.85" transform="rotate(45,32,32)" />
+      <ellipse cx="32" cy="20" rx="4" ry="8" fill="url(#ft-petal)" opacity="0.92" transform="rotate(90,32,32)" />
+      <ellipse cx="32" cy="20" rx="4" ry="8" fill="url(#ft-petal)" opacity="0.85" transform="rotate(135,32,32)" />
+      <ellipse cx="32" cy="20" rx="4" ry="8" fill="url(#ft-petal)" opacity="0.92" transform="rotate(180,32,32)" />
+      <ellipse cx="32" cy="20" rx="4" ry="8" fill="url(#ft-petal)" opacity="0.85" transform="rotate(225,32,32)" />
+      <ellipse cx="32" cy="20" rx="4" ry="8" fill="url(#ft-petal)" opacity="0.92" transform="rotate(270,32,32)" />
+      <ellipse cx="32" cy="20" rx="4" ry="8" fill="url(#ft-petal)" opacity="0.85" transform="rotate(315,32,32)" />
+      <circle cx="32" cy="32" r="7" fill="url(#ft-bg)" />
+      <circle cx="32" cy="32" r="5" fill="#fff9e6" opacity="0.95" />
+      <circle cx="32" cy="32" r="2.5" fill="url(#ft-bg)" />
+    </svg>
+  );
 }
 
 export default function Footer({
@@ -33,12 +75,10 @@ export default function Footer({
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-full gold-shimmer flex items-center justify-center">
-                <span className="text-white text-lg font-cinzel font-bold">L</span>
-              </div>
+              <FooterLogo size={40} />
               <div>
-                <span className="font-cinzel text-xl font-bold tracking-widest gold-text">
-                  {websiteName.toUpperCase()}
+                <span className="font-cinzel text-lg font-bold tracking-widest gold-text uppercase leading-tight block">
+                  {websiteName}
                 </span>
               </div>
             </div>
@@ -158,10 +198,28 @@ export default function Footer({
           <p className="text-xs text-[hsl(40,15%,50%)] font-poppins text-center">
             {footerText}
           </p>
-          <div className="flex items-center gap-2 text-xs text-[hsl(40,15%,50%)] font-poppins">
-            <span>Made with</span>
-            <Heart size={12} className="text-[hsl(43,74%,55%)] fill-current" />
-            <span>for beauty</span>
+          <div className="flex flex-col sm:flex-row items-center gap-4 text-xs text-[hsl(40,15%,50%)] font-poppins">
+            <div className="flex items-center gap-2">
+              <span>Made with</span>
+              <Heart size={12} className="text-[hsl(43,74%,55%)] fill-current" />
+              <span>for beauty</span>
+            </div>
+            <div className="hidden sm:block w-px h-4 bg-[rgba(184,142,40,0.25)]" />
+            <motion.a
+              href="https://primelinkbranding.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 group"
+              whileHover={{ scale: 1.03 }}
+            >
+              <span className="text-[hsl(40,15%,45%)] group-hover:text-[hsl(43,74%,55%)] transition-colors">
+                Designed by
+              </span>
+              <span className="font-semibold tracking-wide text-[hsl(43,74%,55%)] group-hover:text-[hsl(43,74%,65%)] transition-colors">
+                Prime Link Branding
+              </span>
+              <ExternalLink size={10} className="text-[hsl(43,74%,45%)] group-hover:text-[hsl(43,74%,65%)] transition-colors" />
+            </motion.a>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import ServicesPage from "@/pages/services";
 import GalleryPage from "@/pages/gallery";
 import AdminPanel from "@/pages/admin";
 import NotFound from "@/pages/not-found";
+import { SiteContentProvider } from "@/context/SiteContentContext";
 
 const queryClient = new QueryClient();
 
@@ -27,11 +28,13 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <LoadingScreen />
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <Router />
-        </WouterRouter>
-        <Toaster />
+        <SiteContentProvider>
+          <LoadingScreen />
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <Router />
+          </WouterRouter>
+          <Toaster />
+        </SiteContentProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );
