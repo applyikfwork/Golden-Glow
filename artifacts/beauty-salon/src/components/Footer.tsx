@@ -8,6 +8,7 @@ interface FooterProps {
   whatsappLink?: string;
   instagramLink?: string;
   footerText?: string;
+  address?: string;
 }
 
 function FooterLogo({ size = 36 }: { size?: number }) {
@@ -58,6 +59,7 @@ export default function Footer({
   whatsappLink = "#",
   instagramLink = "#",
   footerText = "© 2024 Lumière Beauty. Crafted with love for elegance and confidence.",
+  address,
 }: FooterProps) {
   return (
     <footer className="bg-[hsl(25,20%,10%)] text-[hsl(40,30%,85%)] relative overflow-hidden">
@@ -170,12 +172,14 @@ export default function Footer({
                   {contactNumber}
                 </a>
               </div>
-              <div className="flex items-start gap-3">
-                <MapPin size={16} className="text-[hsl(43,74%,55%)] mt-0.5 shrink-0" />
-                <span className="text-sm text-[hsl(40,20%,65%)] font-poppins">
-                  123 Luxury Lane, Beauty District
-                </span>
-              </div>
+              {(address || "123 Luxury Lane, Beauty District") && (
+                <div className="flex items-start gap-3">
+                  <MapPin size={16} className="text-[hsl(43,74%,55%)] mt-0.5 shrink-0" />
+                  <span className="text-sm text-[hsl(40,20%,65%)] font-poppins">
+                    {address || "123 Luxury Lane, Beauty District"}
+                  </span>
+                </div>
+              )}
               <motion.a
                 href={whatsappLink}
                 target="_blank"

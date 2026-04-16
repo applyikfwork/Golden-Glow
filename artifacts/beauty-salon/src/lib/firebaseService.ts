@@ -72,6 +72,7 @@ export interface SiteContent {
   seoBusinessName?: string;
   seoBusinessPhone?: string;
   seoBusinessCity?: string;
+  address?: string;
 }
 
 export interface WhyChooseItem {

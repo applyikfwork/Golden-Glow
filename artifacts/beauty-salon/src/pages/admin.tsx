@@ -182,6 +182,18 @@ function HomeEditor({ content, onSave }: { content: SiteContent; onSave: (c: Sit
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [heroFile, setHeroFile] = useState<File | null>(null);
+  const [heroFileError, setHeroFileError] = useState("");
+
+  const handleHeroFile = (file: File | undefined) => {
+    setHeroFileError("");
+    if (!file) { setHeroFile(null); return; }
+    if (file.size > 1 * 1024 * 1024) {
+      setHeroFileError("Image must be less than 1 MB. Please compress or resize before uploading.");
+      setHeroFile(null);
+      return;
+    }
+    setHeroFile(file);
+  };
 
   const handleSave = async () => {
     setSaving(true);
@@ -244,8 +256,13 @@ function HomeEditor({ content, onSave }: { content: SiteContent; onSave: (c: Sit
                 <img src={heroFile ? URL.createObjectURL(heroFile) : form.heroImage}
                   alt="Hero preview" className="w-full h-40 object-cover rounded-xl opacity-80" />
               )}
-              <input type="file" accept="image/*" onChange={(e) => setHeroFile(e.target.files?.[0] || null)}
+              <input type="file" accept="image/*" onChange={(e) => handleHeroFile(e.target.files?.[0])}
                 className="admin-input cursor-pointer" data-testid="hero-image-input" />
+              {heroFileError && (
+                <p className="font-poppins text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded-xl px-3 py-2 mt-1">
+                  ⚠️ {heroFileError}
+                </p>
+              )}
               {form.heroImage && (
                 <input value={form.heroImage} onChange={(e) => setForm({ ...form, heroImage: e.target.value })}
                   placeholder="Or paste image URL" className="admin-input" />
@@ -317,7 +334,19 @@ function ServicesManager() {
     name: "", description: "", price: "", duration: "", category: "Hair", imageUrl: "", featured: false,
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imageFileError, setImageFileError] = useState("");
   const [saving, setSaving] = useState(false);
+
+  const handleServiceFile = (file: File | undefined) => {
+    setImageFileError("");
+    if (!file) { setImageFile(null); return; }
+    if (file.size > 1 * 1024 * 1024) {
+      setImageFileError("Image must be less than 1 MB. Please compress or resize before uploading.");
+      setImageFile(null);
+      return;
+    }
+    setImageFile(file);
+  };
 
   useEffect(() => { getServices().then(setServices); }, []);
 
@@ -417,8 +446,14 @@ function ServicesManager() {
                     <img src={imageFile ? URL.createObjectURL(imageFile) : form.imageUrl}
                       alt="Preview" className="w-full h-32 object-cover rounded-xl mb-2 opacity-80" />
                   )}
-                  <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files?.[0] || null)}
+                  <input type="file" accept="image/*" onChange={(e) => handleServiceFile(e.target.files?.[0])}
                     className="admin-input cursor-pointer text-sm" />
+                  {imageFileError && (
+                    <p className="font-poppins text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded-xl px-3 py-2 mt-1">
+                      ⚠️ {imageFileError}
+                    </p>
+                  )}
+                  <p className="font-poppins text-[10px] text-[hsl(40,15%,45%)] mt-1">Max file size: 1 MB</p>
                   <input value={form.imageUrl} onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
                     placeholder="Or paste image URL" className="admin-input mt-2 text-sm" />
                 </div>
@@ -500,7 +535,19 @@ function GalleryManager() {
     imageUrl: "", title: "", text: "", category: "Hair",
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imageFileError, setImageFileError] = useState("");
   const [saving, setSaving] = useState(false);
+
+  const handleGalleryFile = (file: File | undefined) => {
+    setImageFileError("");
+    if (!file) { setImageFile(null); return; }
+    if (file.size > 1 * 1024 * 1024) {
+      setImageFileError("Image must be less than 1 MB. Please compress or resize before uploading.");
+      setImageFile(null);
+      return;
+    }
+    setImageFile(file);
+  };
 
   useEffect(() => { getGallery().then(setGallery); }, []);
 
@@ -583,8 +630,14 @@ function GalleryManager() {
                     <img src={imageFile ? URL.createObjectURL(imageFile) : form.imageUrl}
                       alt="Preview" className="w-full h-32 object-cover rounded-xl mb-2 opacity-80" />
                   )}
-                  <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files?.[0] || null)}
+                  <input type="file" accept="image/*" onChange={(e) => handleGalleryFile(e.target.files?.[0])}
                     className="admin-input cursor-pointer text-sm" data-testid="gallery-image-input" />
+                  {imageFileError && (
+                    <p className="font-poppins text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded-xl px-3 py-2 mt-1">
+                      ⚠️ {imageFileError}
+                    </p>
+                  )}
+                  <p className="font-poppins text-[10px] text-[hsl(40,15%,45%)] mt-1">Max file size: 1 MB</p>
                   <input value={form.imageUrl} onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
                     placeholder="Or paste image URL" className="admin-input mt-2 text-sm" />
                 </div>
@@ -744,8 +797,8 @@ function FooterEditor({ content, onSave }: { content: SiteContent; onSave: (c: S
           <input value={form.contactNumber || ""} onChange={(e) => setForm({ ...form, contactNumber: e.target.value })}
             placeholder="+91 98765 43210" className="admin-input" />
         </Field>
-        <Field label="Address">
-          <input value={(form as any).address || ""} onChange={(e) => setForm({ ...form, ...(form as any), address: e.target.value })}
+        <Field label="Address (shown in website footer)">
+          <input value={form.address || ""} onChange={(e) => setForm({ ...form, address: e.target.value })}
             placeholder="123 Beauty Lane, Your City" className="admin-input" />
         </Field>
       </Section>

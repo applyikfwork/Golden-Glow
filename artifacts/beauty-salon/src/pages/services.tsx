@@ -232,7 +232,12 @@ export default function ServicesPage() {
       {/* ═══ FEATURED SERVICE SPOTLIGHT ═══ */}
       {featuredService && !loading && (
         <FadeIn>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-8 mb-6 sm:mb-8 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12 mb-6 sm:mb-8 relative z-10">
+            <div className="font-poppins text-xs text-muted-foreground uppercase tracking-widest text-center mb-4 flex items-center justify-center gap-3">
+              <span className="w-8 h-px bg-[hsl(43,74%,49%)]" />
+              <span className="text-[hsl(43,74%,42%)] font-semibold">Featured This Week</span>
+              <span className="w-8 h-px bg-[hsl(43,74%,49%)]" />
+            </div>
             <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-[rgba(184,142,40,0.2)]"
               style={{ background: "linear-gradient(135deg, hsl(25,20%,10%) 0%, hsl(30,25%,14%) 100%)" }}>
               <div className="grid sm:grid-cols-5 gap-0 items-center">
@@ -438,7 +443,8 @@ export default function ServicesPage() {
       </div>
 
       <Footer websiteName={content?.websiteName} contactNumber={content?.contactNumber}
-        whatsappLink={content?.whatsappLink} instagramLink={content?.instagramLink} footerText={content?.footerText} />
+        whatsappLink={content?.whatsappLink} instagramLink={content?.instagramLink} footerText={content?.footerText}
+        address={content?.address} />
       <FloatingButtons whatsappLink={content?.whatsappLink} />
 
       {/* Service Detail Modal */}

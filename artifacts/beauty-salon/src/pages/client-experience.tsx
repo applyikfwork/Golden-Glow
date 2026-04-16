@@ -377,7 +377,8 @@ export default function ClientExperiencePage() {
       </div>
 
       <Footer websiteName={content?.websiteName} contactNumber={content?.contactNumber}
-        whatsappLink={content?.whatsappLink} instagramLink={content?.instagramLink} footerText={content?.footerText} />
+        whatsappLink={content?.whatsappLink} instagramLink={content?.instagramLink} footerText={content?.footerText}
+        address={content?.address} />
       <FloatingButtons whatsappLink={content?.whatsappLink} />
     </div>
   );
