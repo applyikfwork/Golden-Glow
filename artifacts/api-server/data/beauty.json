@@ -1,6 +1,17 @@
 {
   "services": [
     {
+      "name": "Unique Makeup Studio Special Course ",
+      "description": "",
+      "price": "799",
+      "duration": "3",
+      "category": "Hair",
+      "imageUrl": "https://www.google.com/maps/place/UNIQUE+MAKEUP+STUDIO/@28.6655657,77.0522086,3a,75y,90t/data=!3m8!1e2!3m6!1sCIABIhCl8STRSel-i7u7IFQAGNGR!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAPNQkAEu7DF9T9qnWFEfQv6bbfP9cKlUuUQO35hHDccerQ6L2V5Y6Ec6OpFnL26yRb9vEl8er-Ngf7zB4rPrb2h_QEiu8aQifVpqh8xoz4SnY2PRODxzJXFbpZ_09peQs2B7ArEAViTigg7J-8tu%3Dw237-h298-k-no!7i1080!8i1356!4m18!1m8!3m7!1s0x390d050d710b1313:0x4be17d827a660404!2sUNIQUE+MAKEUP+STUDIO!8m2!3d28.6655657!4d77.0522086!10e1!16s%2Fg%2F1pp2w_1dc!3m8!1s0x390d050d710b1313:0x4be17d827a660404!8m2!3d28.6655657!4d77.0522086!10e5!14m1!1BCgIgARICGAI!16s%2Fg%2F1pp2w_1dc?entry=ttu&g_ep=EgoyMDI2MDQxMy4wIKXMDSoASAFQAw%3D%3D#",
+      "featured": true,
+      "id": "s1776341221285",
+      "createdAt": 1776341221285
+    },
+    {
       "id": "s1",
       "name": "Luxury Bridal Makeup",
       "description": "Complete bridal transformation with premium international products and airbrush finish.",
@@ -63,7 +74,7 @@
       "duration": "90 min",
       "category": "Spa",
       "imageUrl": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80",
-      "featured": false,
+      "featured": true,
       "createdAt": 1776337123881
     }
   ],
@@ -209,10 +220,10 @@
       }
     ],
     "ctaText": "Book Your Glow Session Today",
-    "websiteName": "UNIQUE MAKEUP STUDIO ",
-    "contactNumber": "+91 98765 43210",
-    "whatsappLink": "https://wa.me/919876543210",
+    "websiteName": "Unique Makeup Studio ",
+    "contactNumber": "+91 79827 90995",
+    "whatsappLink": "https://wa.me/+91 79827 90995",
     "instagramLink": "https://instagram.com",
-    "footerText": "© 2024 Lumière Beauty. Crafted with love for elegance and confidence."
+    "footerText": "© 2026 Unique Makeup Studio. Crafted with love for elegance and confidence."
   }
 }

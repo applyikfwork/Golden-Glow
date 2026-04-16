@@ -336,22 +336,30 @@ function ServicesManager() {
     setShowForm(true);
   };
 
+  const [saveError, setSaveError] = useState("");
+
   const handleSave = async () => {
     setSaving(true);
-    let imageUrl = form.imageUrl;
-    if (imageFile) {
-      imageUrl = await uploadImage(imageFile, "services");
+    setSaveError("");
+    try {
+      let imageUrl = form.imageUrl;
+      if (imageFile) {
+        imageUrl = await uploadImage(imageFile, "services");
+      }
+      const data = { ...form, imageUrl };
+      if (editing?.id) {
+        await updateService(editing.id, data);
+        setServices((prev) => prev.map((s) => s.id === editing.id ? { ...s, ...data } : s));
+      } else {
+        const id = await addService(data);
+        setServices((prev) => [{ id, ...data }, ...prev]);
+      }
+      setShowForm(false);
+    } catch (err) {
+      setSaveError("Save failed. If you uploaded an image, try using an image URL instead.");
+    } finally {
+      setSaving(false);
     }
-    const data = { ...form, imageUrl };
-    if (editing?.id) {
-      await updateService(editing.id, data);
-      setServices((prev) => prev.map((s) => s.id === editing.id ? { ...s, ...data } : s));
-    } else {
-      const id = await addService(data);
-      setServices((prev) => [{ id, ...data }, ...prev]);
-    }
-    setSaving(false);
-    setShowForm(false);
   };
 
   const handleDelete = async (id: string) => {
@@ -420,6 +428,9 @@ function ServicesManager() {
                     className="w-4 h-4 accent-[hsl(43,74%,49%)]" />
                   <span className="font-poppins text-sm text-[hsl(40,20%,70%)]">Mark as Featured</span>
                 </label>
+                {saveError && (
+                  <p className="text-red-400 text-xs font-poppins bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-2">{saveError}</p>
+                )}
                 <motion.button onClick={handleSave} disabled={saving || !form.name}
                   className="w-full py-3 rounded-full font-montserrat text-sm font-bold tracking-wider uppercase text-white gold-shimmer disabled:opacity-50"
                   whileHover={{ scale: 1.02 }} data-testid="save-service-btn">
@@ -507,20 +518,28 @@ function GalleryManager() {
     setShowForm(true);
   };
 
+  const [saveError, setSaveError] = useState("");
+
   const handleSave = async () => {
     setSaving(true);
-    let imageUrl = form.imageUrl;
-    if (imageFile) { imageUrl = await uploadImage(imageFile, "gallery"); }
-    const data = { ...form, imageUrl };
-    if (editing?.id) {
-      await updateGalleryItem(editing.id, data);
-      setGallery((prev) => prev.map((g) => g.id === editing.id ? { ...g, ...data } : g));
-    } else {
-      const id = await addGalleryItem(data);
-      setGallery((prev) => [{ id, ...data }, ...prev]);
+    setSaveError("");
+    try {
+      let imageUrl = form.imageUrl;
+      if (imageFile) { imageUrl = await uploadImage(imageFile, "gallery"); }
+      const data = { ...form, imageUrl };
+      if (editing?.id) {
+        await updateGalleryItem(editing.id, data);
+        setGallery((prev) => prev.map((g) => g.id === editing.id ? { ...g, ...data } : g));
+      } else {
+        const id = await addGalleryItem(data);
+        setGallery((prev) => [{ id, ...data }, ...prev]);
+      }
+      setShowForm(false);
+    } catch (err) {
+      setSaveError("Save failed. If you uploaded an image, try using an image URL instead.");
+    } finally {
+      setSaving(false);
     }
-    setSaving(false);
-    setShowForm(false);
   };
 
   const handleDelete = async (id: string) => {
@@ -577,6 +596,9 @@ function GalleryManager() {
                   className="admin-input">
                   {galleryCategories.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
+                {saveError && (
+                  <p className="text-red-400 text-xs font-poppins bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-2">{saveError}</p>
+                )}
                 <motion.button onClick={handleSave} disabled={saving || !form.title}
                   className="w-full py-3 rounded-full font-montserrat text-sm font-bold tracking-wider uppercase text-white gold-shimmer disabled:opacity-50"
                   whileHover={{ scale: 1.02 }} data-testid="save-gallery-btn">
@@ -675,6 +697,77 @@ function SiteSettings({ content, onSave }: { content: SiteContent; onSave: (c: S
   );
 }
 
+// ===== FOOTER EDITOR =====
+function FooterEditor({ content, onSave }: { content: SiteContent; onSave: (c: SiteContent) => void }) {
+  const [form, setForm] = useState<SiteContent>(content);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSave = async () => {
+    setSaving(true);
+    setError("");
+    try {
+      await updateSiteContent(form);
+      onSave(form);
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
+    } catch {
+      setError("Failed to save. Please try again.");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="space-y-8">
+      <div className="flex items-center justify-between">
+        <h2 className="font-cinzel text-xl font-bold gold-text">Footer Customisation</h2>
+        <motion.button onClick={handleSave} disabled={saving}
+          className="flex items-center gap-2 px-6 py-2.5 rounded-full font-poppins text-sm font-semibold text-white gold-shimmer disabled:opacity-50"
+          whileHover={{ scale: 1.02 }} data-testid="save-footer-btn">
+          <Save size={16} />
+          {saving ? "Saving..." : saved ? "Saved!" : "Save Footer"}
+        </motion.button>
+      </div>
+      {error && (
+        <p className="text-red-400 text-xs font-poppins bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">{error}</p>
+      )}
+      <Section title="Footer Text">
+        <Field label="Copyright / Footer Text">
+          <input value={form.footerText || ""} onChange={(e) => setForm({ ...form, footerText: e.target.value })}
+            placeholder="© 2024 Your Studio. All rights reserved." className="admin-input" />
+        </Field>
+      </Section>
+      <Section title="Contact Information">
+        <Field label="Phone Number">
+          <input value={form.contactNumber || ""} onChange={(e) => setForm({ ...form, contactNumber: e.target.value })}
+            placeholder="+91 98765 43210" className="admin-input" />
+        </Field>
+        <Field label="Address">
+          <input value={(form as any).address || ""} onChange={(e) => setForm({ ...form, ...(form as any), address: e.target.value })}
+            placeholder="123 Beauty Lane, Your City" className="admin-input" />
+        </Field>
+      </Section>
+      <Section title="Social Links">
+        <Field label="WhatsApp Link">
+          <input value={form.whatsappLink || ""} onChange={(e) => setForm({ ...form, whatsappLink: e.target.value })}
+            placeholder="https://wa.me/919876543210" className="admin-input" />
+        </Field>
+        <Field label="Instagram Link">
+          <input value={form.instagramLink || ""} onChange={(e) => setForm({ ...form, instagramLink: e.target.value })}
+            placeholder="https://instagram.com/yourpage" className="admin-input" />
+        </Field>
+      </Section>
+      <div className="rounded-2xl p-4 border border-[rgba(184,142,40,0.1)] bg-[rgba(184,142,40,0.04)]">
+        <p className="font-poppins text-xs text-[hsl(40,15%,45%)]">
+          <span className="text-[hsl(43,74%,55%)] font-semibold">Note:</span> The "Design by Prime Link" credit in the footer is fixed and cannot be changed.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 // ===== HELPERS =====
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -701,7 +794,8 @@ const sidebarItems = [
   { id: "home", label: "Home Control", icon: <Crown size={18} /> },
   { id: "services", label: "Manage Services", icon: <Scissors size={18} /> },
   { id: "gallery", label: "Manage Gallery", icon: <Image size={18} /> },
-  { id: "settings", label: "Settings", icon: <Settings size={18} /> },
+  { id: "footer", label: "Footer", icon: <Settings size={18} /> },
+  { id: "settings", label: "Settings", icon: <Users size={18} /> },
 ];
 
 export default function AdminPanel() {
@@ -801,6 +895,7 @@ export default function AdminPanel() {
               {activeTab === "home" && <HomeEditor content={content} onSave={setContent} />}
               {activeTab === "services" && <ServicesManager />}
               {activeTab === "gallery" && <GalleryManager />}
+              {activeTab === "footer" && <FooterEditor content={content} onSave={setContent} />}
               {activeTab === "settings" && <SiteSettings content={content} onSave={setContent} />}
             </motion.div>
           </AnimatePresence>
