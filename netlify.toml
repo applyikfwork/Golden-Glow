@@ -1,0 +1,12 @@
+[build]
+  command = "pnpm --filter @workspace/beauty-salon run build"
+  publish = "artifacts/beauty-salon/dist/public"
+
+[build.environment]
+  BASE_PATH = "/"
+  NODE_VERSION = "22"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
