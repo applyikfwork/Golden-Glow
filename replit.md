@@ -28,9 +28,23 @@ pnpm workspace monorepo using TypeScript. Contains a luxury beauty salon website
 
 #### Pages:
 - `/` — Home Page (hero, about, why choose us, stats, featured services, testimonials, CTA)
-- `/services` — Services Page (dynamic, filterable, searchable)
-- `/gallery` — Gallery Page (masonry grid, lightbox, filterable)
-- `/adminbeauty` — Hidden Admin Panel (password: `12345678`)
+- `/services` — Services page (responsive grid, category filter, search, service detail modal)
+- `/gallery` — Gallery (masonry layout, lightbox, category filter)
+- `/experience` — Client Experience (before/after slider comparisons, testimonials carousel)
+- `/lookbook` — Lookbook (style inspirations, occasion filter, look detail modal)
+- `/adminbeauty` — Admin Panel (password: `12345678`), includes SEO control tab
+- `*` — Luxury branded 404 page with quick links
+
+#### Key Features:
+- Fully responsive for mobile, tablet, and desktop
+- Service detail modal with booking CTA
+- Before & After side-by-side drag slider (no extra packages)
+- Virtual Lookbook with curated looks, products, and filtering by category/occasion
+- SEO: Google meta tags, Open Graph, Twitter Card, schema.org LocalBusiness structured data
+- `public/sitemap.xml` for all public routes
+- `src/hooks/usePageSEO.ts` — per-page dynamic title/description/og tags
+- Admin panel SEO tab: per-page title, description, global keywords, OG image, business info
+
 
 #### Features:
 - Loading screen with logo reveal animation

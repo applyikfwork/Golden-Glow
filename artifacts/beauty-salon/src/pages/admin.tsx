@@ -768,6 +768,99 @@ function FooterEditor({ content, onSave }: { content: SiteContent; onSave: (c: S
   );
 }
 
+// ===== SEO EDITOR =====
+function SEOEditor({ content, onSave }: { content: SiteContent; onSave: (c: SiteContent) => void }) {
+  const [form, setForm] = useState<SiteContent>(content);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+
+  const handleSave = async () => {
+    setSaving(true);
+    await updateSiteContent(form);
+    onSave(form);
+    setSaving(false);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  };
+
+  const updatePageSEO = (page: keyof SiteContent, field: "title" | "description", val: string) => {
+    const existing = (form[page] as { title?: string; description?: string }) || {};
+    setForm({ ...form, [page]: { ...existing, [field]: val } });
+  };
+
+  const pages = [
+    { key: "seoHome" as const, label: "Home Page", path: "/" },
+    { key: "seoServices" as const, label: "Services Page", path: "/services" },
+    { key: "seoGallery" as const, label: "Gallery Page", path: "/gallery" },
+    { key: "seoExperience" as const, label: "Client Experience Page", path: "/experience" },
+    { key: "seoLookbook" as const, label: "Lookbook Page", path: "/lookbook" },
+  ];
+
+  return (
+    <div className="space-y-8">
+      <div className="flex items-center justify-between">
+        <h2 className="font-cinzel text-xl font-bold gold-text">SEO & Discoverability</h2>
+        <motion.button onClick={handleSave} disabled={saving}
+          className="flex items-center gap-2 px-6 py-2.5 rounded-full font-poppins text-sm font-semibold text-white gold-shimmer disabled:opacity-50"
+          whileHover={{ scale: 1.02 }}>
+          <Save size={16} />
+          {saving ? "Saving..." : saved ? "Saved!" : "Save SEO"}
+        </motion.button>
+      </div>
+
+      <Section title="Global SEO">
+        <Field label="Business Name (schema.org)">
+          <input value={form.seoBusinessName || form.websiteName || ""} onChange={(e) => setForm({ ...form, seoBusinessName: e.target.value })}
+            placeholder="Lumière Beauty" className="admin-input" />
+        </Field>
+        <Field label="Business Phone (schema.org)">
+          <input value={form.seoBusinessPhone || form.contactNumber || ""} onChange={(e) => setForm({ ...form, seoBusinessPhone: e.target.value })}
+            placeholder="+91 98765 43210" className="admin-input" />
+        </Field>
+        <Field label="Business City">
+          <input value={form.seoBusinessCity || ""} onChange={(e) => setForm({ ...form, seoBusinessCity: e.target.value })}
+            placeholder="Mumbai" className="admin-input" />
+        </Field>
+        <Field label="Meta Keywords (comma-separated)">
+          <input value={form.seoMetaKeywords || ""} onChange={(e) => setForm({ ...form, seoMetaKeywords: e.target.value })}
+            placeholder="luxury beauty salon, bridal makeup, hair treatment..." className="admin-input" />
+        </Field>
+        <Field label="Open Graph Image URL">
+          <input value={form.seoOgImage || ""} onChange={(e) => setForm({ ...form, seoOgImage: e.target.value })}
+            placeholder="https://... (1200×630px image)" className="admin-input" />
+          <p className="font-poppins text-xs text-[hsl(40,15%,45%)] mt-1">This image appears when your site is shared on WhatsApp, Facebook, Twitter etc.</p>
+        </Field>
+      </Section>
+
+      {pages.map(({ key, label, path }) => (
+        <Section key={key} title={`${label} (${path})`}>
+          <Field label="Page Title">
+            <input
+              value={(form[key] as { title?: string })?.title || ""}
+              onChange={(e) => updatePageSEO(key, "title", e.target.value)}
+              placeholder={`E.g. "${label} | Lumière Beauty"`}
+              className="admin-input" />
+          </Field>
+          <Field label="Page Description (150–160 chars)">
+            <textarea
+              value={(form[key] as { description?: string })?.description || ""}
+              onChange={(e) => updatePageSEO(key, "description", e.target.value)}
+              placeholder="Describe this page for search engines..."
+              rows={2}
+              className="admin-input resize-none" />
+          </Field>
+        </Section>
+      ))}
+
+      <div className="rounded-2xl p-4 border border-[rgba(184,142,40,0.1)] bg-[rgba(184,142,40,0.04)]">
+        <p className="font-poppins text-xs text-[hsl(40,15%,45%)] leading-relaxed">
+          <span className="text-[hsl(43,74%,55%)] font-semibold">SEO Tip:</span> Page titles should be 50–60 characters and descriptions 150–160 characters for best results on Google. Use your city and service type in both.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 // ===== HELPERS =====
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -796,6 +889,7 @@ const sidebarItems = [
   { id: "gallery", label: "Manage Gallery", icon: <Image size={18} /> },
   { id: "footer", label: "Footer", icon: <Settings size={18} /> },
   { id: "settings", label: "Settings", icon: <Users size={18} /> },
+  { id: "seo", label: "SEO & Discoverability", icon: <TrendingUp size={18} /> },
 ];
 
 export default function AdminPanel() {
@@ -897,6 +991,7 @@ export default function AdminPanel() {
               {activeTab === "gallery" && <GalleryManager />}
               {activeTab === "footer" && <FooterEditor content={content} onSave={setContent} />}
               {activeTab === "settings" && <SiteSettings content={content} onSave={setContent} />}
+              {activeTab === "seo" && <SEOEditor content={content} onSave={setContent} />}
             </motion.div>
           </AnimatePresence>
         </div>

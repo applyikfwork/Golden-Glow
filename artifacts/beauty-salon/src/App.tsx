@@ -6,6 +6,8 @@ import LoadingScreen from "@/components/LoadingScreen";
 import HomePage from "@/pages/home";
 import ServicesPage from "@/pages/services";
 import GalleryPage from "@/pages/gallery";
+import ClientExperiencePage from "@/pages/client-experience";
+import LookbookPage from "@/pages/lookbook";
 import AdminPanel from "@/pages/admin";
 import NotFound from "@/pages/not-found";
 import { SiteContentProvider } from "@/context/SiteContentContext";
@@ -18,6 +20,8 @@ function Router() {
       <Route path="/" component={HomePage} />
       <Route path="/services" component={ServicesPage} />
       <Route path="/gallery" component={GalleryPage} />
+      <Route path="/experience" component={ClientExperiencePage} />
+      <Route path="/lookbook" component={LookbookPage} />
       <Route path="/adminbeauty" component={AdminPanel} />
       <Route component={NotFound} />
     </Switch>

@@ -43,6 +43,11 @@ export interface GalleryItem {
   createdAt?: unknown;
 }
 
+export interface PageSEOSettings {
+  title?: string;
+  description?: string;
+}
+
 export interface SiteContent {
   heroTitle?: string;
   heroSubtitle?: string;
@@ -57,6 +62,16 @@ export interface SiteContent {
   whatsappLink?: string;
   instagramLink?: string;
   footerText?: string;
+  seoHome?: PageSEOSettings;
+  seoServices?: PageSEOSettings;
+  seoGallery?: PageSEOSettings;
+  seoExperience?: PageSEOSettings;
+  seoLookbook?: PageSEOSettings;
+  seoMetaKeywords?: string;
+  seoOgImage?: string;
+  seoBusinessName?: string;
+  seoBusinessPhone?: string;
+  seoBusinessCity?: string;
 }
 
 export interface WhyChooseItem {
