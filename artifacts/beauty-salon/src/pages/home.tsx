@@ -8,7 +8,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
-import { getSiteContent, getFeaturedServices, SiteContent, Service } from "@/lib/firebaseService";
+import { getSiteContent, getFeaturedServices, getDefaultContent, SiteContent, Service } from "@/lib/apiService";
 
 const iconMap: Record<string, React.ReactNode> = {
   award: <Award size={28} />,
@@ -102,7 +102,7 @@ const heroImages = [
 ];
 
 export default function HomePage() {
-  const [content, setContent] = useState<SiteContent | null>(null);
+  const [content, setContent] = useState<SiteContent>(getDefaultContent());
   const [featuredServices, setFeaturedServices] = useState<Service[]>([]);
   const [testimonialIdx, setTestimonialIdx] = useState(0);
   const [heroImg, setHeroImg] = useState(0);
@@ -111,19 +111,19 @@ export default function HomePage() {
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
+  const demoFeatured: Service[] = [
+    { id: "1", name: "Luxury Bridal Makeup", description: "Complete bridal transformation with premium products.", price: "₹8,999", duration: "4 hours", category: "Bridal", imageUrl: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80", featured: true },
+    { id: "2", name: "Hair Styling & Treatment", description: "Professional styling and deep conditioning treatment.", price: "₹2,499", duration: "2 hours", category: "Hair", imageUrl: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80", featured: true },
+    { id: "3", name: "Luxury Facial", description: "Signature facial with premium skincare products.", price: "₹3,499", duration: "90 min", category: "Skin", imageUrl: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80", featured: true },
+  ];
+
   useEffect(() => {
-    getSiteContent().then(setContent);
-    getFeaturedServices().then((svcs) => {
-      if (svcs.length === 0) {
-        setFeaturedServices([
-          { id: "1", name: "Luxury Bridal Makeup", description: "Complete bridal transformation with premium products.", price: "₹8,999", duration: "4 hours", category: "Bridal", imageUrl: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80", featured: true },
-          { id: "2", name: "Hair Styling & Treatment", description: "Professional styling and deep conditioning treatment.", price: "₹2,499", duration: "2 hours", category: "Hair", imageUrl: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80", featured: true },
-          { id: "3", name: "Luxury Facial", description: "Signature facial with premium skincare products.", price: "₹3,499", duration: "90 min", category: "Skin", imageUrl: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80", featured: true },
-        ]);
-      } else {
-        setFeaturedServices(svcs.slice(0, 3));
-      }
-    });
+    getSiteContent()
+      .then(setContent)
+      .catch(() => setContent(getDefaultContent()));
+    getFeaturedServices()
+      .then((svcs) => setFeaturedServices(svcs.length > 0 ? svcs.slice(0, 3) : demoFeatured))
+      .catch(() => setFeaturedServices(demoFeatured));
   }, []);
 
   // Auto-rotate hero images

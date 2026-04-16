@@ -9,7 +9,7 @@ import {
   getSiteContent, updateSiteContent, getServices, addService, updateService, deleteService,
   getGallery, addGalleryItem, updateGalleryItem, deleteGalleryItem,
   uploadImage, SiteContent, Service, GalleryItem, getDefaultContent,
-} from "@/lib/firebaseService";
+} from "@/lib/apiService";
 
 const ADMIN_PASSWORD = "12345678";
 const SESSION_KEY = "beauty_admin_session";

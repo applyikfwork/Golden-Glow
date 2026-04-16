@@ -4,7 +4,7 @@ import { X, ZoomIn } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
-import { getGallery, getSiteContent, GalleryItem, SiteContent } from "@/lib/firebaseService";
+import { getGallery, getSiteContent, GalleryItem, SiteContent } from "@/lib/apiService";
 
 const galleryCategories = ["All", "Bridal", "Hair", "Makeup", "Nails", "Skin"];
 
@@ -49,11 +49,16 @@ export default function GalleryPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([getGallery(), getSiteContent()]).then(([items, cnt]) => {
-      setGallery(items.length > 0 ? items : DEMO_GALLERY);
-      setContent(cnt);
-      setLoading(false);
-    });
+    Promise.all([getGallery(), getSiteContent()])
+      .then(([items, cnt]) => {
+        setGallery(items.length > 0 ? items : DEMO_GALLERY);
+        setContent(cnt);
+        setLoading(false);
+      })
+      .catch(() => {
+        setGallery(DEMO_GALLERY);
+        setLoading(false);
+      });
   }, []);
 
   // Close lightbox on Escape

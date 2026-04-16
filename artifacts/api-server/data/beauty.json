@@ -1,0 +1,218 @@
+{
+  "services": [
+    {
+      "id": "s1",
+      "name": "Luxury Bridal Makeup",
+      "description": "Complete bridal transformation with premium international products and airbrush finish.",
+      "price": "₹8,999",
+      "duration": "4 hours",
+      "category": "Bridal",
+      "imageUrl": "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80",
+      "featured": true,
+      "createdAt": 1776337118881
+    },
+    {
+      "id": "s2",
+      "name": "Hair Styling & Treatment",
+      "description": "Professional styling and deep conditioning treatment for gorgeous, healthy hair.",
+      "price": "₹2,499",
+      "duration": "2 hours",
+      "category": "Hair",
+      "imageUrl": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80",
+      "featured": true,
+      "createdAt": 1776337119881
+    },
+    {
+      "id": "s3",
+      "name": "Luxury Facial",
+      "description": "Signature facial with premium skincare and advanced techniques for glowing skin.",
+      "price": "₹3,499",
+      "duration": "90 min",
+      "category": "Skin",
+      "imageUrl": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80",
+      "featured": true,
+      "createdAt": 1776337120881
+    },
+    {
+      "id": "s4",
+      "name": "Nail Art & Extensions",
+      "description": "Intricate nail art designs with premium gel and acrylic extensions that last.",
+      "price": "₹1,499",
+      "duration": "2 hours",
+      "category": "Nails",
+      "imageUrl": "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80",
+      "featured": false,
+      "createdAt": 1776337121881
+    },
+    {
+      "id": "s5",
+      "name": "Balayage & Highlights",
+      "description": "Sun-kissed balayage and natural highlights by our expert colorists using Loreal & Schwarzkopf.",
+      "price": "₹4,999",
+      "duration": "3 hours",
+      "category": "Hair",
+      "imageUrl": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80",
+      "featured": false,
+      "createdAt": 1776337122881
+    },
+    {
+      "id": "s6",
+      "name": "Aromatherapy Spa",
+      "description": "Full body aromatherapy massage with essential oils for deep relaxation and rejuvenation.",
+      "price": "₹2,999",
+      "duration": "90 min",
+      "category": "Spa",
+      "imageUrl": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&q=80",
+      "featured": false,
+      "createdAt": 1776337123881
+    }
+  ],
+  "gallery": [
+    {
+      "id": "g1",
+      "imageUrl": "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=800&q=80",
+      "title": "Bridal Glam",
+      "text": "Full bridal transformation",
+      "category": "Bridal",
+      "createdAt": 1776337118881
+    },
+    {
+      "id": "g2",
+      "imageUrl": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80",
+      "title": "Hair Magic",
+      "text": "Stunning hair makeover",
+      "category": "Hair",
+      "createdAt": 1776337119881
+    },
+    {
+      "id": "g3",
+      "imageUrl": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80",
+      "title": "Glowing Skin",
+      "text": "Luxury facial results",
+      "category": "Skin",
+      "createdAt": 1776337120881
+    },
+    {
+      "id": "g4",
+      "imageUrl": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80",
+      "title": "Color Dreams",
+      "text": "Beautiful balayage",
+      "category": "Hair",
+      "createdAt": 1776337121381
+    },
+    {
+      "id": "g5",
+      "imageUrl": "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&q=80",
+      "title": "Nail Art",
+      "text": "Intricate nail designs",
+      "category": "Nails",
+      "createdAt": 1776337121881
+    },
+    {
+      "id": "g6",
+      "imageUrl": "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=800&q=80",
+      "title": "Makeup Artistry",
+      "text": "Editorial makeup look",
+      "category": "Makeup",
+      "createdAt": 1776337122381
+    },
+    {
+      "id": "g7",
+      "imageUrl": "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&q=80",
+      "title": "Spa Serenity",
+      "text": "Relaxation and rejuvenation",
+      "category": "Skin",
+      "createdAt": 1776337122881
+    },
+    {
+      "id": "g8",
+      "imageUrl": "https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=800&q=80",
+      "title": "Bridal Party",
+      "text": "Full wedding party styling",
+      "category": "Bridal",
+      "createdAt": 1776337123381
+    }
+  ],
+  "content": {
+    "heroTitle": "Reveal Your True Beauty",
+    "heroSubtitle": "Luxury Hair, Skin & Bridal Care Experience",
+    "heroImage": "",
+    "aboutText": "We create confidence through beauty. Expert stylists, premium products, and unforgettable results that transform not just your look — but how you feel about yourself. Step into a world of elegance and let us craft your signature style.",
+    "whyChooseUs": [
+      {
+        "icon": "award",
+        "title": "Certified Experts",
+        "description": "Our artists are trained at top institutions worldwide."
+      },
+      {
+        "icon": "sparkles",
+        "title": "Premium Products",
+        "description": "Only the finest international brands for your skin & hair."
+      },
+      {
+        "icon": "shield",
+        "title": "Hygienic Care",
+        "description": "Hospital-grade sanitization protocols for every service."
+      },
+      {
+        "icon": "heart",
+        "title": "Personalized Styling",
+        "description": "Every look is crafted uniquely for you."
+      },
+      {
+        "icon": "crown",
+        "title": "Bridal Specialists",
+        "description": "Make your special day truly unforgettable."
+      },
+      {
+        "icon": "gem",
+        "title": "Affordable Luxury",
+        "description": "Premium quality without the premium price tag."
+      }
+    ],
+    "stats": [
+      {
+        "value": "500+",
+        "label": "Happy Clients"
+      },
+      {
+        "value": "1200+",
+        "label": "Services Done"
+      },
+      {
+        "value": "5",
+        "label": "Years Experience"
+      },
+      {
+        "value": "4.9",
+        "label": "Star Rating"
+      }
+    ],
+    "testimonials": [
+      {
+        "name": "Priya Sharma",
+        "role": "Bride",
+        "text": "The bridal package was absolutely stunning. Every detail was perfect and I felt like royalty on my wedding day. Truly a luxury experience!",
+        "rating": 5
+      },
+      {
+        "name": "Ananya Patel",
+        "role": "Regular Client",
+        "text": "I've been coming here for 2 years and I'm always blown away. The team understands exactly what I want and delivers perfection every time.",
+        "rating": 5
+      },
+      {
+        "name": "Meera Kapoor",
+        "role": "Hair Treatment",
+        "text": "My hair has never felt this healthy and beautiful! The treatment they recommended was life-changing. Highly recommend to everyone.",
+        "rating": 5
+      }
+    ],
+    "ctaText": "Book Your Glow Session Today",
+    "websiteName": "UNIQUE MAKEUP STUDIO ",
+    "contactNumber": "+91 98765 43210",
+    "whatsappLink": "https://wa.me/919876543210",
+    "instagramLink": "https://instagram.com",
+    "footerText": "© 2024 Lumière Beauty. Crafted with love for elegance and confidence."
+  }
+}

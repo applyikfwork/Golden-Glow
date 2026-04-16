@@ -4,7 +4,7 @@ import { Search, Clock, Tag } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
-import { getServices, getSiteContent, Service, SiteContent } from "@/lib/firebaseService";
+import { getServices, getSiteContent, Service, SiteContent } from "@/lib/apiService";
 
 const categories = ["All", "Hair", "Makeup", "Skin", "Nails", "Bridal", "Spa"];
 
@@ -46,11 +46,16 @@ export default function ServicesPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([getServices(), getSiteContent()]).then(([svcs, cnt]) => {
-      setServices(svcs.length > 0 ? svcs : DEMO_SERVICES);
-      setContent(cnt);
-      setLoading(false);
-    });
+    Promise.all([getServices(), getSiteContent()])
+      .then(([svcs, cnt]) => {
+        setServices(svcs.length > 0 ? svcs : DEMO_SERVICES);
+        setContent(cnt);
+        setLoading(false);
+      })
+      .catch(() => {
+        setServices(DEMO_SERVICES);
+        setLoading(false);
+      });
   }, []);
 
   const filtered = services.filter((s) => {
