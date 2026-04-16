@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Instagram, Phone, MapPin, Heart, ExternalLink } from "lucide-react";
+import { Instagram, Phone, MapPin } from "lucide-react";
 import { Link } from "wouter";
 
 interface FooterProps {
@@ -198,28 +198,9 @@ export default function Footer({
           <p className="text-xs text-[hsl(40,15%,50%)] font-poppins text-center">
             {footerText}
           </p>
-          <div className="flex flex-col sm:flex-row items-center gap-4 text-xs text-[hsl(40,15%,50%)] font-poppins">
-            <div className="flex items-center gap-2">
-              <span>Made with</span>
-              <Heart size={12} className="text-[hsl(43,74%,55%)] fill-current" />
-              <span>for beauty</span>
-            </div>
-            <div className="hidden sm:block w-px h-4 bg-[rgba(184,142,40,0.25)]" />
-            <motion.a
-              href="https://primelinkbranding.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 group"
-              whileHover={{ scale: 1.03 }}
-            >
-              <span className="text-[hsl(40,15%,45%)] group-hover:text-[hsl(43,74%,55%)] transition-colors">
-                Designed by
-              </span>
-              <span className="font-semibold tracking-wide text-[hsl(43,74%,55%)] group-hover:text-[hsl(43,74%,65%)] transition-colors">
-                Prime Link Branding
-              </span>
-              <ExternalLink size={10} className="text-[hsl(43,74%,45%)] group-hover:text-[hsl(43,74%,65%)] transition-colors" />
-            </motion.a>
+          <div className="text-xs text-[hsl(40,15%,50%)] font-poppins">
+            <span className="text-[hsl(40,15%,45%)]">Design by </span>
+            <span className="font-semibold tracking-wide text-[hsl(43,74%,55%)]">Prime Link</span>
           </div>
         </div>
       </div>
